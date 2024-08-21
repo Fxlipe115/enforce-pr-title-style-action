@@ -32,7 +32,10 @@ export const getRegex = (): RegExp[] => {
   const projectKeysInput = core.getMultilineInput("projectKeys", {
     required: false,
   });
-  const separator = core.getInput("separator", { required: false, trimWhitespace: false});
+  const separator = core.getInput("separator", {
+    required: false,
+    trimWhitespace: false,
+  });
   const keyAnywhereInTitle = core.getBooleanInput("keyAnywhereInTitle", {
     required: false,
   });

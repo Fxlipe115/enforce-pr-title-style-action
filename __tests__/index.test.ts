@@ -130,9 +130,7 @@ describe("index", () => {
         ] = "true";
         const regex = getRegex();
         expect(regex.length).toEqual(1);
-        expect(regex[0]).toEqual(
-          new RegExp(`(.)*(AB-){1}(\\d)+:(\\S)+(.)+`),
-        );
+        expect(regex[0]).toEqual(new RegExp(`(.)*(AB-){1}(\\d)+:(\\S)+(.)+`));
         expect(regex[0].test("other words AB-43: stuff and things")).toBe(
           false,
         );
@@ -382,7 +380,7 @@ describe("index", () => {
 
     describe("when a separator with a trailing space is provided", () => {
       beforeEach(() => resetEnvironmentVariables());
-    
+
       it("uses a project key and a colon separator with a trailing space if they exist", () => {
         process.env[
           `INPUT_${projectKeyInputName.replace(/ /g, "_").toUpperCase()}`
@@ -400,7 +398,7 @@ describe("index", () => {
         expect(regex[0].test("AB-123: PR Title")).toBe(true);
         expect(regex[0].test("AB-43:stuff and things")).toBe(false);
       });
-    
+
       it("uses a project key and an underscore separator with a trailing space if they exist", () => {
         process.env[
           `INPUT_${projectKeyInputName.replace(/ /g, "_").toUpperCase()}`
@@ -418,7 +416,7 @@ describe("index", () => {
         expect(regex[0].test("AB-123_ PR Title")).toBe(true);
         expect(regex[0].test("AB-43_stuff and things")).toBe(false);
       });
-    
+
       it("uses a project key and a colon separator with a trailing space if they exist anywhere in the title", () => {
         process.env[
           `INPUT_${projectKeyInputName.replace(/ /g, "_").toUpperCase()}`
@@ -436,7 +434,7 @@ describe("index", () => {
         expect(regex[0].test("other words AB-123: PR Title")).toBe(true);
         expect(regex[0].test("other words AB-43:stuff and things")).toBe(false);
       });
-    
+
       it("uses a project key and an underscore separator with a trailing space if they exist anywhere in the title", () => {
         process.env[
           `INPUT_${projectKeyInputName.replace(/ /g, "_").toUpperCase()}`
@@ -454,7 +452,7 @@ describe("index", () => {
         expect(regex[0].test("other words AB-123_ PR Title")).toBe(true);
         expect(regex[0].test("other words AB-43_stuff and things")).toBe(false);
       });
-    
+
       it("uses a project key with multiple keys and a separator with a trailing space", () => {
         const projectNames: string[] = ["AB", "CD", "EF", "GH"];
         process.env[
@@ -480,7 +478,7 @@ describe("index", () => {
           );
         });
       });
-    
+
       it("uses a project key with multiple keys and a separator with a trailing space anywhere in the title", () => {
         const projectNames: string[] = ["AB", "CD", "EF"];
         process.env[
@@ -498,14 +496,17 @@ describe("index", () => {
             new RegExp(`(.)*(${projectNames[index]}-){1}(\\d)+: (\\S)+(.)+`),
           );
           expect(
-            regex.test(`other words ${projectNames[index]}-43: stuff and things`),
+            regex.test(
+              `other words ${projectNames[index]}-43: stuff and things`,
+            ),
           ).toBe(true);
           expect(
-            regex.test(`other words ${projectNames[index]}-43:stuff and things`),
+            regex.test(
+              `other words ${projectNames[index]}-43:stuff and things`,
+            ),
           ).toBe(false);
         });
       });
     });
-    
   });
 });
